@@ -1,0 +1,76 @@
+{% extends 'base.html' %}v
+{% block 'mainbody' %}
+
+
+
+<br>
+
+<div class="container">
+  <center>
+    {% if message  %}
+      <h4 class="green-text">{{message}}</h4>
+    {% endif %}
+  
+     {% if error  %}
+      <h4 class="red-text">{{error}}</h4>
+    {% endif %}
+  
+    
+  </center>
+  
+<div class="container">
+    <form id="calculation_form" method="post" class='z-depth-2'  style="padding: 20px;border-radius: 10px;"> {% csrf_token %}
+        <center><h3><b>Calculator</b></h3></center>
+        <div class="input-field ">
+            <input id="expression" name="expression" type="text" class="validate">
+            <label for="expression">Expression</label>
+          </div>
+     
+          <div class="input-field ">
+            <input id="result" type="text" name="result" class="validate" readonly>
+            <label id="result_label" for="result">Result</label>
+          </div>
+        
+    
+     
+          
+        <button class="btn nextbtn right">Caluculate</button>
+
+<br><br>
+
+    </form>
+</div>
+</div>
+
+
+
+
+
+<script>
+$('#calculation_form').submit(function(e){
+    e.preventDefault()
+    var expression = $('#expression').val();
+    $.ajax({
+        method:'GET',
+        data:{'expression':expression},
+        url:'/perform_calculation',
+        success:function(data){
+            var result = data.result
+            $('#result').addClass('active');
+            $('#result').val(result)
+
+            $('#calculation_form input[id=result]').val(result)
+            $('#calculation_form label[id=result_label]').addClass('active')
+
+        }
+    })
+})
+</script>
+
+
+ 
+
+
+{% endblock 'mainbody' %}
+{% block 'js' %}
+{% endblock 'js' %}

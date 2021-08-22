@@ -1,0 +1,58 @@
+{% extends 'base.html' %}v
+{% block 'mainbody' %}
+
+
+
+<br>
+
+<div class="container">
+  <center>
+    {% if message  %}
+      <h4 class="green-text">{{message}}</h4>
+    {% endif %}
+  
+     {% if error  %}
+      <h4 class="red-text">{{error}}</h4>
+    {% endif %}
+  
+    
+  </center>
+  
+<div class="container">
+  
+  <table class="striped">
+    <thead>
+      <tr>
+          <th>Expression</th>
+          <th>Result</th> 
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for entry in entries %}
+        
+      <tr> 
+        <td style="width: 50%;">{{entry.expression}}</td>  
+        <td style="width: 50%;">{{entry.result}}</td>  
+      </tr>  
+      {% endfor %}  
+
+
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+ 
+
+
+{% endblock 'mainbody' %}
+{% block 'js' %}
+{% endblock 'js' %}
